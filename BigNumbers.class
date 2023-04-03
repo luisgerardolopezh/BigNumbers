@@ -1,0 +1,79 @@
+public class BigNumbers {
+  public static String add(String a, String b) {
+    String hlpr="",sum="",res="";
+    int n1=0,n2=0,r=0,lngg=0,lngl=0,counter=0,ex=0;
+    boolean c1=false,c2=false,nz=false;
+    if(a.length()>b.length()){
+      lngg=a.length();
+      lngl=b.length();
+      c1=true;
+    }else if(a.length()<b.length()){
+      lngg=b.length();
+      lngl=a.length();
+      c2=true;
+    }else{
+      lngg=a.length();
+      lngl=b.length();
+      c1=false;
+      c2=false;
+    }
+    while(counter<lngg){
+      if(c1==true && c2==false){
+        n1=a.charAt((lngg-1)-counter)-'0';
+        if(counter<lngl){
+          n2=b.charAt((lngl-1)-counter)-'0';
+        }else{
+          n2=0;
+        }
+      }else if(c1==false && c2==true){
+        n1=b.charAt((lngg-1)-counter)-'0';
+        if(counter<lngl){
+          n2=a.charAt((lngl-1)-counter)-'0';
+        }else{
+          n2=0;
+        }
+      }else{
+        n1=a.charAt((lngg-1)-counter)-'0';
+        if(counter<lngl){
+          n2=b.charAt((lngl-1)-counter)-'0';
+        }else{
+          n2=0;
+        }
+      }
+      r=ex+n1+n2;
+      if(r>=10){
+        if((lngg-counter)==1){
+          hlpr=Integer.toString(r);
+          ex=hlpr.charAt(1)-'0';
+          sum=sum+(Integer.toString(ex));
+          ex=hlpr.charAt(0)-'0';
+          sum=sum+(Integer.toString(ex));
+        }else{
+        hlpr=Integer.toString(r);
+        ex=hlpr.charAt(0)-'0';
+        sum=sum+(hlpr.charAt(1)-'0');
+          }
+      }else{
+        ex=0;
+        sum=sum+(Integer.toString(r));
+      }
+      counter++;
+    }
+    lngg=sum.length()-1;
+    for(int i=lngg;i>=0;i--){
+      if((sum.charAt(i)-'0')==0 && nz==false){
+        if(i==lngg){
+          continue;
+        }else if((sum.charAt(i+1)-'0')>0){
+          nz=true;
+          res=res+(sum.charAt(i)-'0');
+        }else{
+          continue;
+        }
+      }else{
+        res=res+(sum.charAt(i)-'0');
+        }
+    }
+    return res;
+  }
+}
